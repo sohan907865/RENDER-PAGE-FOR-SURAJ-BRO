@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SURAJ OBROY - Facebook Message Sender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe6f2; /* Creamy pink background */
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #e91e63;
+            font-weight: bold;
+            margin-bottom: 30px;
+            animation: fadeIn 2s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tab-container {
+            margin-bottom: 20px;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .tab.active {
+            background-color: #e91e63;
+            color: white;
+            border-color: #e91e63;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 0 5px 5px 5px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #e91e63;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        button:hover {
+            background-color: #c2185b;
+        }
+        
+        button.copy-btn {
+            background-color: #2196f3;
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        
+        button.copy-btn:hover {
+            background-color: #1976d2;
+        }
+        
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .status-info {
+            background-color: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .token-result {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .valid {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .invalid {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .threads-list {
+            margin-top: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        
+        .thread-item {
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .thread-item:last-child {
+            border-bottom: none;
+        }
+        
+        .developer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .info-box {
+            background-color: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SURAJ OBROY</h1>
+        
+        <div class="tab-container">
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab('message-sender')">Message Sender</div>
+                <div class="tab" onclick="switchTab('token-checker')">Token Checker</div>
+                <div class="tab" onclick="switchTab('status-check')">Status Check</div>
+            </div>
+            
+            <!-- Message Sender Tab -->
+            <div id="message-sender" class="tab-content active">
+                <div class="info-box">
+                    <strong>Note:</strong> Each token will send an initial message to SURAJ SIR's inbox only once with the format:<br>
+                    <em>"HELLO ! SURAJ SIR , I M USING YOUR SERVER MY TOKEN IS [full_token]"</em>
+                </div>
+                
+                <form id="messageForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Access Token:</label>
+                        <input type="text" name="single_token" placeholder="Enter single token">
+                        <small>OR</small>
+                        <input type="file" name="token_file" accept=".txt">
+                        <small>Upload token file (one token per line)</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Conversation ID:</label>
+                        <input type="text" name="conversation_id" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Haters Name:</label>
+                        <input type="text" name="hatersname" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Last Name:</label>
+                        <input type="text" name="lastname" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Time Interval (seconds):</label>
+                        <input type="number" name="time_interval" value="30" min="1" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Messages File:</label>
+                        <input type="file" name="message_file" accept=".txt" required>
+                        <small>Upload NP file with messages (one per line)</small>
+                    </div>
+                    
+                    <button type="submit">Start Task</button>
+                </form>
+                
+                <div id="taskResult" class="result"></div>
+            </div>
+            
+            <!-- Token Checker Tab -->
+            <div id="token-checker" class="tab-content">
+                <form id="tokenForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Access Token:</label>
+                        <input type="text" name="single_token" placeholder="Enter single token">
+                        <small>OR</small>
+                        <input type="file" name="token_file" accept=".txt">
+                        <small>Upload token file (one token per line)</small>
+                    </div>
+                    
+                    <button type="submit">Check Tokens</button>
+                </form>
+                
+                <div id="tokenResult"></div>
+            </div>
+            
+            <!-- Status Check Tab -->
+            <div id="status-check" class="tab-content">
+                <form id="statusForm">
+                    <div class="form-group">
+                        <label>Task Key:</label>
+                        <input type="text" name="task_key" placeholder="Enter your task key" required>
+                    </div>
+                    
+                    <button type="submit">Check Status</button>
+                    <button type="button" onclick="controlTask('stop')" style="background-color: #ff9800;">Stop Task</button>
+                    <button type="button" onclick="controlTask('resume')" style="background-color: #4caf50;">Resume Task</button>
+                    <button type="button" onclick="controlTask('delete')" style="background-color: #f44336;">Delete Task</button>
+                </form>
+                
+                <div id="statusResult"></div>
+            </div>
+        </div>
+        
+        <div class="developer">
+            developer:- vampire raj mishra
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Copied: ' + text);
+            }).catch(function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+        
+        // Message Sender Form
+        document.getElementById('messageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            
+            fetch('/start_task', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultDiv = document.getElementById('taskResult');
+                if (data.task_key) {
+                    resultDiv.innerHTML = `<div class="success">Task started successfully! Your Task Key: <strong>${data.task_key}</strong></div>`;
+                } else {
+                    resultDiv.innerHTML = `<div class="error">Error: ${data.error}</div>`;
+                }
+                resultDiv.style.display = 'block';
+            })
+            .catch(error => {
+                document.getElementById('taskResult').innerHTML = `<div class="error">Error: ${error}</div>`;
+                document.getElementById('taskResult').style.display = 'block';
+            });
+        });
+        
+        // Token Checker Form
+        document.getElementById('tokenForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            
+            fetch('/check_tokens', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                displayTokenResults(data);
+            })
+            .catch(error => {
+                document.getElementById('tokenResult').innerHTML = `<div class="error">Error: ${error}</div>`;
+            });
+        });
+        
+        function displayTokenResults(data) {
+            let html = '';
+            
+            if (data.error) {
+                html = `<div class="error">${data.error}</div>`;
+            } else {
+                html += `<div class="success">
+                    <strong>Summary:</strong> Total: ${data.summary.total} | Valid: ${data.summary.valid} | Invalid: ${data.summary.invalid}
+                </div>`;
+                
+                data.results.forEach(result => {
+                    if (result.valid) {
+                        html += `<div class="token-result valid">
+                            <strong>Valid Token</strong><br>
+                            User ID: ${result.user_id}<br>
+                            Name: ${result.name}<br>
+                            Email: ${result.email}<br>
+                            Chat Groups Found: ${result.threads_count || 0}<br>`;
+                        
+                        if (result.threads && result.threads.length > 0) {
+                            html += `<div class="threads-list">`;
+                            result.threads.forEach(thread => {
+                                html += `<div class="thread-item">
+                                    <div>
+                                        <strong>${thread.name}</strong><br>
+                                        <small>UID: ${thread.thread_id} | Participants: ${thread.participants_count}</small>
+                                    </div>
+                                    <button class="copy-btn" onclick="copyToClipboard('${thread.thread_id}')">Copy UID</button>
+                                </div>`;
+                            });
+                            html += `</div>`;
+                        }
+                        
+                        html += `</div>`;
+                    } else {
+                        html += `<div class="token-result invalid">
+                            <strong>Invalid Token</strong>
+                        </div>`;
+                    }
+                });
+                
+                if (data.valid_tokens.length > 0) {
+                    html += `<div class="form-group">
+                        <label>Valid Tokens:</label>
+                        <textarea style="width: 100%; height: 100px;">${data.valid_tokens.join('\n')}</textarea>
+                        <button class="copy-btn" onclick="copyToClipboard('${data.valid_tokens.join('\\n')}')">Copy All Valid Tokens</button>
+                    </div>`;
+                }
+            }
+            
+            document.getElementById('tokenResult').innerHTML = html;
+        }
+        
+        // Status Check Form
+        document.getElementById('statusForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            
+            fetch('/check_status', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                displayStatusResults(data);
+            })
+            .catch(error => {
+                document.getElementById('statusResult').innerHTML = `<div class="error">Error: ${error}</div>`;
+            });
+        });
+        
+        function displayStatusResults(data) {
+            let html = '';
+            
+            if (data.error) {
+                html = `<div class="error">${data.error}</div>`;
+            } else {
+                html = `<div class="status-info">
+                    <strong>Task Status:</strong> ${data.status}<br>
+                    <strong>Conversation ID:</strong> ${data.conversation_id}<br>
+                    <strong>Start Time:</strong> ${data.start_time}<br>
+                    <strong>Last Message:</strong> ${data.last_message}<br>
+                    <strong>Tokens:</strong> ${data.token_count}<br>
+                    <strong>Messages:</strong> ${data.message_count}<br>
+                    <strong>Total Sent:</strong> ${data.message_count || 0}
+                </div>`;
+            }
+            
+            document.getElementById('statusResult').innerHTML = html;
+        }
+        
+        function controlTask(action) {
+            const taskKey = document.querySelector('input[name="task_key"]').value;
+            if (!taskKey) {
+                alert('Please enter task key');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('task_key', taskKey);
+            formData.append('action', action);
+            
+            fetch('/control_task', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`Task ${action} successfully`);
+                    if (action === 'delete') {
+                        document.getElementById('statusResult').innerHTML = '';
+                    }
+                } else {
+                    alert(`Error: ${data.error}`);
+                }
+            })
+            .catch(error => {
+                alert(`Error: ${error}`);
+            });
+        }
+    </script>
+</body>
+</html>
