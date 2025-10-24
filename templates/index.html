@@ -15,10 +15,23 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: url('https://i.ibb.co/YFJvW2QV/FB-IMG-17613139050770850.jpg') no-repeat center center fixed;
+            background-size: cover;
             min-height: 100vh;
             padding: 20px;
             color: #333;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: -1;
         }
         
         .container {
