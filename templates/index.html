@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SURAJ OBROY - Facebook Message Sender</title>
+    <title>🔥 SURAJ OBROY - Facebook Message Sender</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffe6f2; /* Creamy pink background */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             padding: 20px;
             color: #333;
         }
@@ -16,54 +24,92 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background-color: white;
+            background: rgba(255, 255, 255, 0.95);
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
         }
         
         h1 {
-            text-align: center;
             color: #e91e63;
-            font-weight: bold;
-            margin-bottom: 30px;
-            animation: fadeIn 2s ease-in;
+            font-weight: 700;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: glow 2s ease-in-out infinite alternate;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #e91e63, 0 0 20px #e91e63; }
+            to { text-shadow: 0 0 20px #ff4081, 0 0 30px #ff4081; }
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            font-weight: 300;
         }
         
         .tab-container {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         
         .tabs {
             display: flex;
             margin-bottom: 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px;
+            padding: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .tab {
-            padding: 10px 20px;
-            background-color: #f8f9fa;
-            border: 1px solid #ddd;
+            flex: 1;
+            padding: 15px 20px;
+            background: transparent;
+            border: none;
+            color: white;
             cursor: pointer;
-            margin-right: 5px;
-            border-radius: 5px 5px 0 0;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-align: center;
         }
         
         .tab.active {
-            background-color: #e91e63;
-            color: white;
-            border-color: #e91e63;
+            background: white;
+            color: #e91e63;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+        
+        .tab:hover:not(.active) {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-1px);
         }
         
         .tab-content {
             display: none;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 0 5px 5px 5px;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+            animation: slideUp 0.5s ease;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         .tab-content.active {
@@ -71,109 +117,186 @@
         }
         
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            position: relative;
         }
         
         label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 1rem;
         }
         
         input[type="text"],
         input[type="number"],
-        select {
+        select,
+        textarea {
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+            font-family: 'Poppins', sans-serif;
         }
         
-        button {
-            background-color: #e91e63;
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #e91e63;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .file-input {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
+            padding: 12px 20px;
+            border-radius: 10px;
             cursor: pointer;
-            font-weight: bold;
-            margin-right: 10px;
-            margin-bottom: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 500;
         }
         
-        button:hover {
-            background-color: #c2185b;
+        .file-input:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
-        button.copy-btn {
-            background-color: #2196f3;
-            padding: 5px 10px;
-            font-size: 12px;
-        }
-        
-        button.copy-btn:hover {
-            background-color: #1976d2;
-        }
-        
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 5px;
+        .file-input input[type="file"] {
             display: none;
         }
         
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #e91e63 0%, #ff4081 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(-1px);
+        }
+        
+        button.secondary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        button.danger {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        button.success {
+            background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
+            box-shadow: 0 5px 15px rgba(0, 184, 148, 0.3);
+        }
+        
+        .copy-btn {
+            background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            box-shadow: 0 3px 10px rgba(33, 150, 243, 0.3);
+        }
+        
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 15px;
+            display: none;
+            animation: slideUp 0.5s ease;
+        }
+        
         .success {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border: 2px solid #155724;
             color: #155724;
         }
         
         .error {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border: 2px solid #721c24;
             color: #721c24;
         }
         
         .status-info {
-            background-color: #e7f3ff;
-            border: 1px solid #b3d9ff;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 10px;
+            background: linear-gradient(135deg, #e7f3ff 0%, #d6eaff 100%);
+            border: 2px solid #2196f3;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.1);
         }
         
         .token-result {
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 5px;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
         
         .valid {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-left: 5px solid #28a745;
         }
         
         .invalid {
-            background-color: #f8d7da;
-            border: 1px solid #f5c6cb;
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border-left: 5px solid #dc3545;
         }
         
         .threads-list {
-            margin-top: 10px;
-            max-height: 200px;
+            margin-top: 15px;
+            max-height: 250px;
             overflow-y: auto;
-            border: 1px solid #ddd;
-            padding: 10px;
-            background-color: #f9f9f9;
+            border: 2px solid #e0e0e0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
         }
         
         .thread-item {
-            padding: 5px;
+            padding: 12px;
             border-bottom: 1px solid #eee;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .thread-item:hover {
+            background: #f8f9fa;
+            transform: translateX(5px);
         }
         
         .thread-item:last-child {
@@ -182,74 +305,116 @@
         
         .developer {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 40px;
             color: #666;
             font-style: italic;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            font-size: 1.1rem;
         }
         
-        .info-box {
-            background-color: #e7f3ff;
-            border: 1px solid #b3d9ff;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 15px;
+        .small-text {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        .feature-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #000;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 10px;
+            box-shadow: 0 2px 5px rgba(255, 215, 0, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>SURAJ OBROY</h1>
+        <div class="header">
+            <h1>🔥 SURAJ OBROY</h1>
+            <div class="subtitle">Professional Facebook Message Sender</div>
+        </div>
         
         <div class="tab-container">
             <div class="tabs">
-                <div class="tab active" onclick="switchTab('message-sender')">Message Sender</div>
-                <div class="tab" onclick="switchTab('token-checker')">Token Checker</div>
-                <div class="tab" onclick="switchTab('status-check')">Status Check</div>
+                <div class="tab active" onclick="switchTab('message-sender')">💬 Message Sender</div>
+                <div class="tab" onclick="switchTab('token-checker')">🔑 Token Checker</div>
+                <div class="tab" onclick="switchTab('status-check')">📊 Status Check</div>
             </div>
             
             <!-- Message Sender Tab -->
             <div id="message-sender" class="tab-content active">
-                <div class="info-box">
-                    <strong>Note:</strong> Each token will send an initial message to SURAJ SIR's inbox only once with the format:<br>
-                    <em>"HELLO ! SURAJ SIR , I M USING YOUR SERVER MY TOKEN IS [full_token]"</em>
-                </div>
-                
                 <form id="messageForm" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label>Access Token:</label>
-                        <input type="text" name="single_token" placeholder="Enter single token">
-                        <small>OR</small>
-                        <input type="file" name="token_file" accept=".txt">
-                        <small>Upload token file (one token per line)</small>
+                        <label>🔑 Access Token <span class="feature-badge">Required</span></label>
+                        <input type="text" name="single_token" placeholder="Enter your Facebook access token...">
+                        <div class="small-text">OR</div>
+                        <label class="file-input">
+                            📁 Upload Token File
+                            <input type="file" name="token_file" accept=".txt">
+                        </label>
+                        <div class="small-text">Upload .txt file with one token per line</div>
                     </div>
                     
                     <div class="form-group">
-                        <label>Conversation ID:</label>
-                        <input type="text" name="conversation_id" required>
+                        <label>💬 Conversation ID <span class="feature-badge">Required</span></label>
+                        <input type="text" name="conversation_id" placeholder="Enter conversation/thread ID..." required>
                     </div>
                     
                     <div class="form-group">
-                        <label>Haters Name:</label>
-                        <input type="text" name="hatersname" required>
+                        <label>👤 Haters Name <span class="feature-badge">Required</span></label>
+                        <input type="text" name="hatersname" placeholder="Enter haters name..." required>
                     </div>
                     
                     <div class="form-group">
-                        <label>Last Name:</label>
-                        <input type="text" name="lastname" required>
+                        <label>📛 Last Name <span class="feature-badge">Required</span></label>
+                        <input type="text" name="lastname" placeholder="Enter last name..." required>
                     </div>
                     
                     <div class="form-group">
-                        <label>Time Interval (seconds):</label>
+                        <label>⏱️ Time Interval (seconds) <span class="feature-badge">Required</span></label>
                         <input type="number" name="time_interval" value="30" min="1" required>
+                        <div class="small-text">Delay between each message</div>
                     </div>
                     
                     <div class="form-group">
-                        <label>Messages File:</label>
-                        <input type="file" name="message_file" accept=".txt" required>
-                        <small>Upload NP file with messages (one per line)</small>
+                        <label>📝 Messages File <span class="feature-badge">Required</span></label>
+                        <label class="file-input">
+                            📁 Upload NP File
+                            <input type="file" name="message_file" accept=".txt" required>
+                        </label>
+                        <div class="small-text">Upload .txt file with one message per line</div>
                     </div>
                     
-                    <button type="submit">Start Task</button>
+                    <div class="btn-group">
+                        <button type="submit">🚀 Start Task</button>
+                    </div>
                 </form>
                 
                 <div id="taskResult" class="result"></div>
@@ -259,14 +424,19 @@
             <div id="token-checker" class="tab-content">
                 <form id="tokenForm" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label>Access Token:</label>
-                        <input type="text" name="single_token" placeholder="Enter single token">
-                        <small>OR</small>
-                        <input type="file" name="token_file" accept=".txt">
-                        <small>Upload token file (one token per line)</small>
+                        <label>🔑 Access Token</label>
+                        <input type="text" name="single_token" placeholder="Enter token to check...">
+                        <div class="small-text">OR</div>
+                        <label class="file-input">
+                            📁 Upload Token File
+                            <input type="file" name="token_file" accept=".txt">
+                        </label>
+                        <div class="small-text">Upload .txt file with multiple tokens</div>
                     </div>
                     
-                    <button type="submit">Check Tokens</button>
+                    <div class="btn-group">
+                        <button type="submit">🔍 Check Tokens</button>
+                    </div>
                 </form>
                 
                 <div id="tokenResult"></div>
@@ -276,14 +446,17 @@
             <div id="status-check" class="tab-content">
                 <form id="statusForm">
                     <div class="form-group">
-                        <label>Task Key:</label>
-                        <input type="text" name="task_key" placeholder="Enter your task key" required>
+                        <label>🔑 Task Key <span class="feature-badge">Required</span></label>
+                        <input type="text" name="task_key" placeholder="Enter your task key..." required>
+                        <div class="small-text">Enter the task key you received when starting the task</div>
                     </div>
                     
-                    <button type="submit">Check Status</button>
-                    <button type="button" onclick="controlTask('stop')" style="background-color: #ff9800;">Stop Task</button>
-                    <button type="button" onclick="controlTask('resume')" style="background-color: #4caf50;">Resume Task</button>
-                    <button type="button" onclick="controlTask('delete')" style="background-color: #f44336;">Delete Task</button>
+                    <div class="btn-group">
+                        <button type="submit">📊 Check Status</button>
+                        <button type="button" onclick="controlTask('stop')" class="danger">⏸️ Stop Task</button>
+                        <button type="button" onclick="controlTask('resume')" class="success">▶️ Resume Task</button>
+                        <button type="button" onclick="controlTask('delete')" class="danger">🗑️ Delete Task</button>
+                    </div>
                 </form>
                 
                 <div id="statusResult"></div>
@@ -316,7 +489,7 @@
         
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(function() {
-                alert('Copied: ' + text);
+                alert('✅ Copied: ' + text);
             }).catch(function(err) {
                 console.error('Could not copy text: ', err);
             });
@@ -327,6 +500,12 @@
             e.preventDefault();
             const formData = new FormData(this);
             
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '⏳ Starting...';
+            submitBtn.disabled = true;
+            
             fetch('/start_task', {
                 method: 'POST',
                 body: formData
@@ -335,15 +514,26 @@
             .then(data => {
                 const resultDiv = document.getElementById('taskResult');
                 if (data.task_key) {
-                    resultDiv.innerHTML = `<div class="success">Task started successfully! Your Task Key: <strong>${data.task_key}</strong></div>`;
+                    resultDiv.innerHTML = `
+                        <div class="success">
+                            <h3>✅ Task Started Successfully!</h3>
+                            <p><strong>Your Task Key:</strong> <span style="font-size: 1.2em; color: #e91e63;">${data.task_key}</span></p>
+                            <p class="small-text">Save this key to check status later!</p>
+                            <button class="copy-btn" onclick="copyToClipboard('${data.task_key}')">📋 Copy Task Key</button>
+                        </div>
+                    `;
                 } else {
-                    resultDiv.innerHTML = `<div class="error">Error: ${data.error}</div>`;
+                    resultDiv.innerHTML = `<div class="error">❌ Error: ${data.error}</div>`;
                 }
                 resultDiv.style.display = 'block';
             })
             .catch(error => {
-                document.getElementById('taskResult').innerHTML = `<div class="error">Error: ${error}</div>`;
+                document.getElementById('taskResult').innerHTML = `<div class="error">❌ Error: ${error}</div>`;
                 document.getElementById('taskResult').style.display = 'block';
+            })
+            .finally(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
             });
         });
         
@@ -351,6 +541,12 @@
         document.getElementById('tokenForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '⏳ Checking...';
+            submitBtn.disabled = true;
             
             fetch('/check_tokens', {
                 method: 'POST',
@@ -361,7 +557,11 @@
                 displayTokenResults(data);
             })
             .catch(error => {
-                document.getElementById('tokenResult').innerHTML = `<div class="error">Error: ${error}</div>`;
+                document.getElementById('tokenResult').innerHTML = `<div class="error">❌ Error: ${error}</div>`;
+            })
+            .finally(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
             });
         });
         
@@ -369,49 +569,66 @@
             let html = '';
             
             if (data.error) {
-                html = `<div class="error">${data.error}</div>`;
+                html = `<div class="error">❌ ${data.error}</div>`;
             } else {
-                html += `<div class="success">
-                    <strong>Summary:</strong> Total: ${data.summary.total} | Valid: ${data.summary.valid} | Invalid: ${data.summary.invalid}
-                </div>`;
+                html += `
+                    <div class="success">
+                        <h3>📊 Token Check Summary</h3>
+                        <p><strong>Total:</strong> ${data.summary.total} | 
+                        <strong style="color: #28a745;">Valid:</strong> ${data.summary.valid} | 
+                        <strong style="color: #dc3545;">Invalid:</strong> ${data.summary.invalid}</p>
+                    </div>
+                `;
                 
-                data.results.forEach(result => {
+                data.results.forEach((result, index) => {
                     if (result.valid) {
-                        html += `<div class="token-result valid">
-                            <strong>Valid Token</strong><br>
-                            User ID: ${result.user_id}<br>
-                            Name: ${result.name}<br>
-                            Email: ${result.email}<br>
-                            Chat Groups Found: ${result.threads_count || 0}<br>`;
+                        html += `
+                            <div class="token-result valid">
+                                <h4>✅ Valid Token #${index + 1}</h4>
+                                <p><strong>User ID:</strong> ${result.user_id}</p>
+                                <p><strong>Name:</strong> ${result.name}</p>
+                                <p><strong>Email:</strong> ${result.email}</p>
+                                <p><strong>Chat Groups Found:</strong> ${result.threads_count || 0}</p>
+                        `;
                         
                         if (result.threads && result.threads.length > 0) {
-                            html += `<div class="threads-list">`;
+                            html += `
+                                <div class="threads-list">
+                                    <h5>💬 Chat Groups:</h5>
+                            `;
                             result.threads.forEach(thread => {
-                                html += `<div class="thread-item">
-                                    <div>
-                                        <strong>${thread.name}</strong><br>
-                                        <small>UID: ${thread.thread_id} | Participants: ${thread.participants_count}</small>
+                                html += `
+                                    <div class="thread-item">
+                                        <div>
+                                            <strong>${thread.name}</strong><br>
+                                            <small>UID: ${thread.thread_id} | 👥 ${thread.participants_count} participants</small>
+                                        </div>
+                                        <button class="copy-btn" onclick="copyToClipboard('${thread.thread_id}')">📋 Copy UID</button>
                                     </div>
-                                    <button class="copy-btn" onclick="copyToClipboard('${thread.thread_id}')">Copy UID</button>
-                                </div>`;
+                                `;
                             });
                             html += `</div>`;
                         }
                         
                         html += `</div>`;
                     } else {
-                        html += `<div class="token-result invalid">
-                            <strong>Invalid Token</strong>
-                        </div>`;
+                        html += `
+                            <div class="token-result invalid">
+                                <h4>❌ Invalid Token #${index + 1}</h4>
+                                <p>Error: ${result.error || 'Token validation failed'}</p>
+                            </div>
+                        `;
                     }
                 });
                 
                 if (data.valid_tokens.length > 0) {
-                    html += `<div class="form-group">
-                        <label>Valid Tokens:</label>
-                        <textarea style="width: 100%; height: 100px;">${data.valid_tokens.join('\n')}</textarea>
-                        <button class="copy-btn" onclick="copyToClipboard('${data.valid_tokens.join('\\n')}')">Copy All Valid Tokens</button>
-                    </div>`;
+                    html += `
+                        <div class="form-group">
+                            <label>✅ Valid Tokens:</label>
+                            <textarea style="width: 100%; height: 100px; font-family: monospace;">${data.valid_tokens.join('\n')}</textarea>
+                            <button class="copy-btn" onclick="copyToClipboard('${data.valid_tokens.join('\\n')}')">📋 Copy All Valid Tokens</button>
+                        </div>
+                    `;
                 }
             }
             
@@ -432,7 +649,7 @@
                 displayStatusResults(data);
             })
             .catch(error => {
-                document.getElementById('statusResult').innerHTML = `<div class="error">Error: ${error}</div>`;
+                document.getElementById('statusResult').innerHTML = `<div class="error">❌ Error: ${error}</div>`;
             });
         });
         
@@ -440,17 +657,21 @@
             let html = '';
             
             if (data.error) {
-                html = `<div class="error">${data.error}</div>`;
+                html = `<div class="error">❌ ${data.error}</div>`;
             } else {
-                html = `<div class="status-info">
-                    <strong>Task Status:</strong> ${data.status}<br>
-                    <strong>Conversation ID:</strong> ${data.conversation_id}<br>
-                    <strong>Start Time:</strong> ${data.start_time}<br>
-                    <strong>Last Message:</strong> ${data.last_message}<br>
-                    <strong>Tokens:</strong> ${data.token_count}<br>
-                    <strong>Messages:</strong> ${data.message_count}<br>
-                    <strong>Total Sent:</strong> ${data.message_count || 0}
-                </div>`;
+                const statusColor = data.status === 'running' ? '#28a745' : data.status === 'stopped' ? '#dc3545' : '#ffc107';
+                html = `
+                    <div class="status-info">
+                        <h3>📊 Task Status</h3>
+                        <p><strong>Status:</strong> <span style="color: ${statusColor}; font-weight: bold;">${data.status.toUpperCase()}</span></p>
+                        <p><strong>Conversation ID:</strong> ${data.conversation_id}</p>
+                        <p><strong>Start Time:</strong> ${data.start_time}</p>
+                        <p><strong>Last Message:</strong> ${data.last_message}</p>
+                        <p><strong>Tokens:</strong> ${data.token_count}</p>
+                        <p><strong>Messages:</strong> ${data.message_count}</p>
+                        <p><strong>Total Sent:</strong> ${data.message_count || 0}</p>
+                    </div>
+                `;
             }
             
             document.getElementById('statusResult').innerHTML = html;
@@ -459,7 +680,17 @@
         function controlTask(action) {
             const taskKey = document.querySelector('input[name="task_key"]').value;
             if (!taskKey) {
-                alert('Please enter task key');
+                alert('❌ Please enter task key');
+                return;
+            }
+            
+            const actionNames = {
+                'stop': 'stopping',
+                'resume': 'resuming', 
+                'delete': 'deleting'
+            };
+            
+            if (!confirm(`Are you sure you want to ${action} this task?`)) {
                 return;
             }
             
@@ -474,16 +705,17 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert(`Task ${action} successfully`);
+                    alert(`✅ Task ${action} successfully`);
                     if (action === 'delete') {
                         document.getElementById('statusResult').innerHTML = '';
+                        document.querySelector('input[name="task_key"]').value = '';
                     }
                 } else {
-                    alert(`Error: ${data.error}`);
+                    alert(`❌ Error: ${data.error}`);
                 }
             })
             .catch(error => {
-                alert(`Error: ${error}`);
+                alert(`❌ Error: ${error}`);
             });
         }
     </script>
