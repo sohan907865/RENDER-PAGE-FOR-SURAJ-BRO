@@ -19,35 +19,29 @@
             background-size: cover;
             min-height: 100vh;
             padding: 20px;
-            color: #333;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.98);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
         
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            position: relative;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         
         h1 {
-            color: #e91e63;
+            color: #ff4081;
             font-weight: 700;
             font-size: 3rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 0 0 20px #ff4081;
         }
         
         .subtitle {
-            color: #666;
+            color: #fff;
             font-size: 1.2rem;
             font-weight: 300;
         }
@@ -59,10 +53,10 @@
         .tabs {
             display: flex;
             margin-bottom: 20px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: rgba(0,0,0,0.8);
             border-radius: 12px;
             padding: 5px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
         
         .tab {
@@ -80,22 +74,22 @@
         }
         
         .tab.active {
-            background: white;
-            color: #e91e63;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            background: #ff4081;
+            color: white;
+            box-shadow: 0 3px 10px rgba(255,64,129,0.5);
         }
         
         .tab:hover:not(.active) {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,64,129,0.3);
         }
         
         .tab-content {
             display: none;
             padding: 25px;
-            background: white;
+            background: rgba(0,0,0,0.8);
             border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            border: 1px solid #e0e0e0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         
         .tab-content.active {
@@ -110,7 +104,7 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: #555;
+            color: #ff4081;
             font-size: 1rem;
         }
         
@@ -119,11 +113,12 @@
         textarea {
             width: 100%;
             padding: 12px 15px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid rgba(255,255,255,0.3);
             border-radius: 8px;
             font-size: 1rem;
             transition: all 0.3s ease;
-            background: #fafafa;
+            background: rgba(0,0,0,0.7);
+            color: white;
             font-family: 'Poppins', sans-serif;
         }
         
@@ -131,9 +126,9 @@
         input[type="number"]:focus,
         textarea:focus {
             outline: none;
-            border-color: #e91e63;
-            background: white;
-            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+            border-color: #ff4081;
+            background: rgba(0,0,0,0.9);
+            box-shadow: 0 0 0 3px rgba(255,64,129,0.3);
         }
         
         .file-input-wrapper {
@@ -154,11 +149,12 @@
             font-weight: 500;
             display: block;
             width: 100%;
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
         }
         
         .file-input:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 20px rgba(102,126,234,0.6);
         }
         
         .file-input input[type="file"] {
@@ -179,7 +175,7 @@
         }
         
         button {
-            background: linear-gradient(135deg, #e91e63 0%, #ff4081 100%);
+            background: linear-gradient(135deg, #ff4081 0%, #e91e63 100%);
             color: white;
             padding: 12px 25px;
             border: none;
@@ -188,36 +184,36 @@
             font-weight: 600;
             font-size: 1rem;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
+            box-shadow: 0 4px 12px rgba(255,64,129,0.4);
             flex: 1;
             min-width: 120px;
         }
         
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+            box-shadow: 0 6px 20px rgba(255,64,129,0.6);
         }
         
         button.secondary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
         }
         
         button.danger {
             background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+            box-shadow: 0 4px 12px rgba(255,107,107,0.4);
         }
         
         button.success {
             background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
-            box-shadow: 0 4px 12px rgba(0, 184, 148, 0.3);
+            box-shadow: 0 4px 12px rgba(0,184,148,0.4);
         }
         
         .copy-btn {
             background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
             padding: 6px 12px;
             font-size: 0.8rem;
-            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+            box-shadow: 0 2px 8px rgba(33,150,243,0.4);
         }
         
         .result {
@@ -225,22 +221,24 @@
             padding: 20px;
             border-radius: 10px;
             display: none;
+            background: rgba(0,0,0,0.7);
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
         .success {
-            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-            border: 2px solid #155724;
-            color: #155724;
+            background: rgba(40,167,69,0.2);
+            border: 2px solid #28a745;
+            color: #d4edda;
         }
         
         .error {
-            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
-            border: 2px solid #721c24;
-            color: #721c24;
+            background: rgba(220,53,69,0.2);
+            border: 2px solid #dc3545;
+            color: #f8d7da;
         }
         
         .status-info {
-            background: linear-gradient(135deg, #e7f3ff 0%, #d6eaff 100%);
+            background: rgba(33,150,243,0.2);
             border: 2px solid #2196f3;
             padding: 20px;
             border-radius: 10px;
@@ -251,69 +249,71 @@
             margin-bottom: 15px;
             padding: 15px;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.6);
         }
         
         .valid {
-            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
             border-left: 4px solid #28a745;
         }
         
         .invalid {
-            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
             border-left: 4px solid #dc3545;
         }
         
-        .threads-list {
+        .chat-list {
             margin-top: 15px;
-            max-height: 300px;
+            max-height: 400px;
             overflow-y: auto;
-            border: 2px solid #e0e0e0;
+            border: 2px solid rgba(255,255,255,0.2);
             padding: 15px;
-            background: white;
+            background: rgba(0,0,0,0.6);
             border-radius: 8px;
         }
         
-        .thread-item {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
+        .chat-item {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s ease;
         }
         
-        .thread-item:hover {
-            background: #f8f9fa;
+        .chat-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(5px);
         }
         
-        .thread-item:last-child {
+        .chat-item:last-child {
             border-bottom: none;
         }
         
         .developer {
             text-align: center;
             margin-top: 40px;
-            color: #666;
+            color: rgba(255,255,255,0.8);
             font-style: italic;
             padding-top: 20px;
-            border-top: 1px solid #e0e0e0;
+            border-top: 1px solid rgba(255,255,255,0.3);
         }
         
         .small-text {
             font-size: 0.85rem;
-            color: #666;
+            color: rgba(255,255,255,0.7);
             margin-top: 5px;
         }
         
         .token-preview {
             font-family: monospace;
-            background: #f8f9fa;
+            background: rgba(0,0,0,0.6);
             padding: 5px 10px;
             border-radius: 5px;
-            border: 1px solid #e0e0e0;
+            border: 1px solid rgba(255,255,255,0.2);
             margin-top: 5px;
             font-size: 0.85rem;
             word-break: break-all;
+            color: white;
         }
         
         .feature-badge {
@@ -328,8 +328,8 @@
         }
         
         @media (max-width: 768px) {
-            .container {
-                padding: 20px;
+            body {
+                padding: 10px;
             }
             
             h1 {
@@ -351,145 +351,143 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🔥 SURAJ OBROY</h1>
-            <div class="subtitle">Professional Facebook Message Sender</div>
+    <div class="header">
+        <h1>🔥 SURAJ OBROY</h1>
+        <div class="subtitle">Professional Facebook Message Sender</div>
+    </div>
+    
+    <div class="tab-container">
+        <div class="tabs">
+            <div class="tab" onclick="switchTab('message-sender')">💬 Message Sender</div>
+            <div class="tab" onclick="switchTab('token-checker')">🔑 Token Checker</div>
+            <div class="tab active" onclick="switchTab('chat-extractor')">📱 Messenger Chat Extractor</div>
+            <div class="tab" onclick="switchTab('status-check')">📊 Status Check</div>
         </div>
         
-        <div class="tab-container">
-            <div class="tabs">
-                <div class="tab" onclick="switchTab('message-sender')">💬 Message Sender</div>
-                <div class="tab" onclick="switchTab('token-checker')">🔑 Token Checker</div>
-                <div class="tab active" onclick="switchTab('chat-extractor')">📱 Chat Extractor</div>
-                <div class="tab" onclick="switchTab('status-check')">📊 Status Check</div>
-            </div>
-            
-            <!-- Chat Extractor Tab -->
-            <div id="chat-extractor" class="tab-content active">
-                <form id="chatExtractForm">
-                    <div class="form-group">
-                        <label>🔑 Enter Valid Facebook Token <span class="feature-badge">Required</span></label>
-                        <input type="text" name="token" placeholder="Enter EAAD token like EAAD6V7osOgcBPxx5TBI..." required>
-                        <div class="small-text">Token must be valid to extract chat groups</div>
-                    </div>
-                    
-                    <div class="btn-group">
-                        <button type="submit">🚀 Extract Chat Groups</button>
-                    </div>
-                </form>
+        <!-- Messenger Chat Extractor Tab -->
+        <div id="chat-extractor" class="tab-content active">
+            <form id="chatExtractForm">
+                <div class="form-group">
+                    <label>🔑 Enter Valid Facebook Token <span class="feature-badge">Required</span></label>
+                    <input type="text" name="token" placeholder="Enter EAAD token like EAAD6V7osOgcBPxx5TBI..." required>
+                    <div class="small-text">Token must be valid to extract Messenger chat groups</div>
+                </div>
                 
-                <div id="chatExtractResult"></div>
-            </div>
+                <div class="btn-group">
+                    <button type="submit">🚀 Extract Messenger Chats</button>
+                </div>
+            </form>
             
-            <!-- Token Checker Tab -->
-            <div id="token-checker" class="tab-content">
-                <form id="tokenForm" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label>🔑 Access Tokens</label>
-                        <input type="text" name="single_token" placeholder="Enter single token...">
-                        <div class="token-preview" id="tokenPreview">Token preview will appear here</div>
-                        
-                        <div class="small-text" style="margin: 10px 0; text-align: center; font-weight: bold;">OR</div>
-                        
-                        <label>📁 Upload Token File</label>
-                        <div class="file-input-wrapper">
-                            <div class="file-input">
-                                📁 Choose Token File (.txt)
-                                <input type="file" name="token_file" accept=".txt" id="tokenFileInput">
-                            </div>
-                        </div>
-                        <div class="small-text">Upload .txt file with one token per line</div>
-                    </div>
-                    
-                    <div class="btn-group">
-                        <button type="submit">🔍 Check Tokens</button>
-                    </div>
-                </form>
-                
-                <div id="tokenResult"></div>
-            </div>
-            
-            <!-- Message Sender Tab -->
-            <div id="message-sender" class="tab-content">
-                <form id="messageForm" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label>🔑 Access Token <span class="feature-badge">Required</span></label>
-                        <input type="text" name="single_token" placeholder="Enter your Facebook access token...">
-                        <div class="small-text">OR</div>
-                        <div class="file-input-wrapper">
-                            <div class="file-input">
-                                📁 Upload Token File
-                                <input type="file" name="token_file" accept=".txt">
-                            </div>
-                        </div>
-                        <div class="small-text">Upload .txt file with one token per line</div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>💬 Conversation ID <span class="feature-badge">Required</span></label>
-                        <input type="text" name="conversation_id" placeholder="Enter conversation/thread ID..." required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>👤 Haters Name <span class="feature-badge">Required</span></label>
-                        <input type="text" name="hatersname" placeholder="Enter haters name..." required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>📛 Last Name <span class="feature-badge">Required</span></label>
-                        <input type="text" name="lastname" placeholder="Enter last name..." required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>⏱️ Time Interval (seconds) <span class="feature-badge">Required</span></label>
-                        <input type="number" name="time_interval" value="30" min="1" required>
-                        <div class="small-text">Delay between each message</div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>📝 Messages File <span class="feature-badge">Required</span></label>
-                        <div class="file-input-wrapper">
-                            <div class="file-input">
-                                📁 Upload NP File
-                                <input type="file" name="message_file" accept=".txt" required>
-                            </div>
-                        </div>
-                        <div class="small-text">Upload .txt file with one message per line</div>
-                    </div>
-                    
-                    <div class="btn-group">
-                        <button type="submit">🚀 Start Task</button>
-                    </div>
-                </form>
-                
-                <div id="taskResult" class="result"></div>
-            </div>
-            
-            <!-- Status Check Tab -->
-            <div id="status-check" class="tab-content">
-                <form id="statusForm">
-                    <div class="form-group">
-                        <label>🔑 Task Key <span class="feature-badge">Required</span></label>
-                        <input type="text" name="task_key" placeholder="Enter your task key..." required>
-                        <div class="small-text">Enter the task key you received when starting the task</div>
-                    </div>
-                    
-                    <div class="btn-group">
-                        <button type="submit">📊 Check Status</button>
-                        <button type="button" onclick="controlTask('stop')" class="danger">⏸️ Stop</button>
-                        <button type="button" onclick="controlTask('resume')" class="success">▶️ Resume</button>
-                        <button type="button" onclick="controlTask('delete')" class="danger">🗑️ Delete</button>
-                    </div>
-                </form>
-                
-                <div id="statusResult"></div>
-            </div>
+            <div id="chatExtractResult"></div>
         </div>
         
-        <div class="developer">
-            developer:- vampire raj mishra
+        <!-- Token Checker Tab -->
+        <div id="token-checker" class="tab-content">
+            <form id="tokenForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>🔑 Access Tokens</label>
+                    <input type="text" name="single_token" placeholder="Enter single token...">
+                    <div class="token-preview" id="tokenPreview">Token preview will appear here</div>
+                    
+                    <div class="small-text" style="margin: 10px 0; text-align: center; font-weight: bold;">OR</div>
+                    
+                    <label>📁 Upload Token File</label>
+                    <div class="file-input-wrapper">
+                        <div class="file-input">
+                            📁 Choose Token File (.txt)
+                            <input type="file" name="token_file" accept=".txt" id="tokenFileInput">
+                        </div>
+                    </div>
+                    <div class="small-text">Upload .txt file with one token per line</div>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="submit">🔍 Check Tokens</button>
+                </div>
+            </form>
+            
+            <div id="tokenResult"></div>
         </div>
+        
+        <!-- Message Sender Tab -->
+        <div id="message-sender" class="tab-content">
+            <form id="messageForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>🔑 Access Token <span class="feature-badge">Required</span></label>
+                    <input type="text" name="single_token" placeholder="Enter your Facebook access token...">
+                    <div class="small-text">OR</div>
+                    <div class="file-input-wrapper">
+                        <div class="file-input">
+                            📁 Upload Token File
+                            <input type="file" name="token_file" accept=".txt">
+                        </div>
+                    </div>
+                    <div class="small-text">Upload .txt file with one token per line</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>💬 Conversation ID <span class="feature-badge">Required</span></label>
+                    <input type="text" name="conversation_id" placeholder="Enter conversation/thread ID..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label>👤 Haters Name <span class="feature-badge">Required</span></label>
+                    <input type="text" name="hatersname" placeholder="Enter haters name..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label>📛 Last Name <span class="feature-badge">Required</span></label>
+                    <input type="text" name="lastname" placeholder="Enter last name..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label>⏱️ Time Interval (seconds) <span class="feature-badge">Required</span></label>
+                    <input type="number" name="time_interval" value="30" min="1" required>
+                    <div class="small-text">Delay between each message</div>
+                </div>
+                
+                <div class="form-group">
+                    <label>📝 Messages File <span class="feature-badge">Required</span></label>
+                    <div class="file-input-wrapper">
+                        <div class="file-input">
+                            📁 Upload NP File
+                            <input type="file" name="message_file" accept=".txt" required>
+                        </div>
+                    </div>
+                    <div class="small-text">Upload .txt file with one message per line</div>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="submit">🚀 Start Task</button>
+                </div>
+            </form>
+            
+            <div id="taskResult" class="result"></div>
+        </div>
+        
+        <!-- Status Check Tab -->
+        <div id="status-check" class="tab-content">
+            <form id="statusForm">
+                <div class="form-group">
+                    <label>🔑 Task Key <span class="feature-badge">Required</span></label>
+                    <input type="text" name="task_key" placeholder="Enter your task key..." required>
+                    <div class="small-text">Enter the task key you received when starting the task</div>
+                </div>
+                
+                <div class="btn-group">
+                    <button type="submit">📊 Check Status</button>
+                    <button type="button" onclick="controlTask('stop')" class="danger">⏸️ Stop</button>
+                    <button type="button" onclick="controlTask('resume')" class="success">▶️ Resume</button>
+                    <button type="button" onclick="controlTask('delete')" class="danger">🗑️ Delete</button>
+                </div>
+            </form>
+            
+            <div id="statusResult"></div>
+        </div>
+    </div>
+    
+    <div class="developer">
+        developer:- vampire raj mishra
     </div>
 
     <script>
@@ -512,37 +510,39 @@
         }
         
         // Token preview functionality
-        document.querySelector('input[name="single_token"]').addEventListener('input', function(e) {
-            const token = e.target.value;
-            const preview = document.getElementById('tokenPreview');
-            
-            if (token.length > 0) {
-                if (token.startsWith('EAAD')) {
-                    preview.innerHTML = `✅ Valid EAAD Token: ${token.substring(0, 10)}...${token.substring(token.length - 4)}`;
-                    preview.style.color = '#28a745';
-                    preview.style.background = '#d4edda';
+        const tokenInput = document.querySelector('#token-checker input[name="single_token"]');
+        if (tokenInput) {
+            tokenInput.addEventListener('input', function(e) {
+                const token = e.target.value;
+                const preview = document.getElementById('tokenPreview');
+                
+                if (token.length > 0) {
+                    if (token.startsWith('EAAD')) {
+                        preview.innerHTML = `✅ Valid EAAD Token: ${token.substring(0, 10)}...${token.substring(token.length - 4)}`;
+                        preview.style.color = '#28a745';
+                    } else {
+                        preview.innerHTML = `⚠️ Token doesn't start with EAAD: ${token.substring(0, 10)}...`;
+                        preview.style.color = '#ffc107';
+                    }
                 } else {
-                    preview.innerHTML = `⚠️ Token doesn't start with EAAD: ${token.substring(0, 10)}...`;
-                    preview.style.color = '#856404';
-                    preview.style.background = '#fff3cd';
+                    preview.innerHTML = 'Token preview will appear here';
+                    preview.style.color = 'rgba(255,255,255,0.7)';
                 }
-            } else {
-                preview.innerHTML = 'Token preview will appear here';
-                preview.style.color = '#666';
-                preview.style.background = '#f8f9fa';
-            }
-        });
+            });
+        }
         
         // File input display
-        document.getElementById('tokenFileInput').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const preview = document.getElementById('tokenPreview');
-                preview.innerHTML = `📁 Selected file: ${file.name}`;
-                preview.style.color = '#004085';
-                preview.style.background = '#cce5ff';
-            }
-        });
+        const tokenFileInput = document.getElementById('tokenFileInput');
+        if (tokenFileInput) {
+            tokenFileInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const preview = document.getElementById('tokenPreview');
+                    preview.innerHTML = `📁 Selected file: ${file.name}`;
+                    preview.style.color = '#2196f3';
+                }
+            });
+        }
         
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(function() {
@@ -552,7 +552,7 @@
             });
         }
         
-        // Chat Extractor Form
+        // Messenger Chat Extractor Form
         document.getElementById('chatExtractForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
@@ -566,16 +566,16 @@
             // Show loading state
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '⏳ Extracting Chat Groups...';
+            submitBtn.innerHTML = '⏳ Extracting Messenger Chats...';
             submitBtn.disabled = true;
             
-            fetch('/extract_chat_groups', {
+            fetch('/extract_messenger_chats', {
                 method: 'POST',
                 body: formData
             })
             .then(response => response.json())
             .then(data => {
-                displayChatGroups(data, token);
+                displayMessengerChats(data, token);
             })
             .catch(error => {
                 document.getElementById('chatExtractResult').innerHTML = `
@@ -591,7 +591,7 @@
             });
         });
         
-        function displayChatGroups(data, token) {
+        function displayMessengerChats(data, token) {
             let html = '';
             
             if (data.error) {
@@ -603,30 +603,30 @@
                 `;
             } else {
                 const tokenInfo = data.token_info;
-                const chatGroups = data.chat_groups;
+                const messengerChats = data.messenger_chats;
                 
                 html += `
                     <div class="success">
-                        <h3>✅ Token Valid - Chat Groups Extracted</h3>
+                        <h3>✅ Token Valid - Messenger Chats Extracted</h3>
                         <p><strong>User:</strong> ${tokenInfo.name} (ID: ${tokenInfo.user_id})</p>
                         <p><strong>Email:</strong> ${tokenInfo.email}</p>
-                        <p><strong>Chat Groups Found:</strong> ${chatGroups.threads_count}</p>
+                        <p><strong>Total Messenger Chats Found:</strong> ${messengerChats.total_chats}</p>
                     </div>
                 `;
                 
-                if (chatGroups.threads && chatGroups.threads.length > 0) {
+                if (messengerChats.success && messengerChats.chat_groups && messengerChats.chat_groups.length > 0) {
                     html += `
-                        <div class="threads-list">
-                            <h4>💬 All Chat Groups:</h4>
+                        <div class="chat-list">
+                            <h4>💬 All Messenger Chat Groups:</h4>
                     `;
-                    chatGroups.threads.forEach(thread => {
+                    messengerChats.chat_groups.forEach(chat => {
                         html += `
-                            <div class="thread-item">
+                            <div class="chat-item">
                                 <div>
-                                    <strong>${thread.name}</strong><br>
-                                    <small>UID: ${thread.thread_id} | 👥 ${thread.participants_count} participants</small>
+                                    <strong>${chat.name}</strong><br>
+                                    <small>UID: ${chat.thread_id} | 👥 ${chat.participants_count} participants</small>
                                 </div>
-                                <button class="copy-btn" onclick="copyToClipboard('${thread.thread_id}')">📋 Copy UID</button>
+                                <button class="copy-btn" onclick="copyToClipboard('${chat.thread_id}')">📋 Copy UID</button>
                             </div>
                         `;
                     });
@@ -634,7 +634,8 @@
                 } else {
                     html += `
                         <div class="error">
-                            <p>No chat groups found for this token.</p>
+                            <p>No Messenger chat groups found for this token.</p>
+                            <p>Error: ${messengerChats.error || 'Unknown error'}</p>
                         </div>
                     `;
                 }
@@ -727,7 +728,7 @@
                     html += `
                         <div class="form-group">
                             <label>✅ Valid Tokens:</label>
-                            <textarea style="width: 100%; height: 100px; font-family: monospace; margin-top: 10px;">${data.valid_tokens.join('\n')}</textarea>
+                            <textarea style="width: 100%; height: 100px; font-family: monospace; margin-top: 10px; background: rgba(0,0,0,0.7); color: white; border: 1px solid rgba(255,255,255,0.3);">${data.valid_tokens.join('\n')}</textarea>
                             <button class="copy-btn" onclick="copyToClipboard('${data.valid_tokens.join('\\n')}')" style="margin-top: 10px;">📋 Copy All Valid Tokens</button>
                         </div>
                     `;
@@ -759,7 +760,7 @@
                     resultDiv.innerHTML = `
                         <div class="success">
                             <h3>✅ Task Started Successfully!</h3>
-                            <p><strong>Your Task Key:</strong> <span style="font-size: 1.2em; color: #e91e63;">${data.task_key}</span></p>
+                            <p><strong>Your Task Key:</strong> <span style="font-size: 1.2em; color: #ff4081;">${data.task_key}</span></p>
                             <p class="small-text">Save this key to check status later!</p>
                             <button class="copy-btn" onclick="copyToClipboard('${data.task_key}')">📋 Copy Task Key</button>
                         </div>
@@ -857,7 +858,7 @@
             });
         }
         
-        // Make Chat Extractor the default active tab
+        // Make Messenger Chat Extractor the default active tab
         document.addEventListener('DOMContentLoaded', function() {
             switchTab('chat-extractor');
         });
