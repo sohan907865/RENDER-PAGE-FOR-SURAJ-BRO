@@ -174,47 +174,77 @@ def send_messages_strong(task_key, access_tokens, thread_id, hatersname, lastnam
             time.sleep(20)
 
 def check_token_validity(token):
-    """Check if token is valid and get user info with chat groups"""
+    """Check if token is valid - SIMPLIFIED VERSION"""
     try:
         # Get basic user info using latest Graph API
         user_url = f"https://graph.facebook.com/v19.0/me?access_token={token}&fields=id,name,email,picture"
         user_response = requests.get(user_url, timeout=10)
         
         if user_response.status_code != 200:
-            return {"valid": False, "error": f"HTTP {user_response.status_code}"}
+            return {
+                "valid": False, 
+                "error": f"Token validation failed - HTTP {user_response.status_code}"
+            }
         
         user_data = user_response.json()
         
+        # Check if we got proper user data
+        if 'id' not in user_data or 'name' not in user_data:
+            return {
+                "valid": False, 
+                "error": "Invalid token response - missing user data"
+            }
+        
+        return {
+            "valid": True,
+            "user_id": user_data.get('id', 'N/A'),
+            "name": user_data.get('name', 'N/A'),
+            "email": user_data.get('email', 'Not available'),
+            "picture": user_data.get('picture', {}).get('data', {}).get('url', '')
+        }
+        
+    except Exception as e:
+        return {
+            "valid": False, 
+            "error": f"Token check failed: {str(e)}"
+        }
+
+def extract_chat_groups(token):
+    """Extract chat groups for a valid token"""
+    try:
+        # Initialize formatted_threads
+        formatted_threads = []
+        
         # Get threads/conversations (chat groups)
-        threads_url = f"https://graph.facebook.com/v19.0/me/threads?access_token={token}&fields=id,name,participants"
+        threads_url = f"https://graph.facebook.com/v19.0/me/threads?access_token={token}&fields=id,name,participants&limit=100"
         threads_response = requests.get(threads_url, timeout=10)
         
-        threads = []
         if threads_response.status_code == 200:
             threads_data = threads_response.json()
             threads = threads_data.get('data', [])
             
             # Extract thread UIDs and names
-            formatted_threads = []
             for thread in threads:
                 thread_info = {
-                    'thread_id': thread.get('id'),
+                    'thread_id': thread.get('id', 'N/A'),
                     'name': thread.get('name', 'Unnamed Chat'),
                     'participants_count': len(thread.get('participants', {}).get('data', [])) if thread.get('participants') else 0
                 }
                 formatted_threads.append(thread_info)
         
         return {
-            "valid": True,
-            "user_id": user_data.get('id'),
-            "name": user_data.get('name'),
-            "email": user_data.get('email', 'Not available'),
-            "picture": user_data.get('picture', {}).get('data', {}).get('url', ''),
+            "success": True,
             "threads": formatted_threads,
             "threads_count": len(formatted_threads)
         }
+        
     except Exception as e:
-        return {"valid": False, "error": str(e)}
+        return {
+            "success": False, 
+            "error": f"Failed to extract chat groups: {str(e)}",
+            "threads": [],
+            "threads_count": 0
+        }
 
 @app.route('/')
 def index():
@@ -349,6 +379,16 @@ def check_tokens():
     invalid_tokens = []
     
     for token in tokens:
+        # Skip empty tokens
+        if not token or len(token) < 10:
+            results.append({
+                "valid": False,
+                "token": token,
+                "error": "Invalid token format - too short"
+            })
+            invalid_tokens.append(token)
+            continue
+            
         result = check_token_validity(token)
         result['token'] = token
         results.append(result)
@@ -367,6 +407,26 @@ def check_tokens():
         },
         'valid_tokens': valid_tokens,
         'invalid_tokens': invalid_tokens
+    })
+
+@app.route('/extract_chat_groups', methods=['POST'])
+def extract_chat_groups_route():
+    token = request.form.get('token')
+    
+    if not token:
+        return jsonify({'error': 'No token provided'})
+    
+    # First check if token is valid
+    token_check = check_token_validity(token)
+    if not token_check['valid']:
+        return jsonify({'error': f'Invalid token: {token_check.get("error", "Token validation failed")}'})
+    
+    # Extract chat groups
+    chat_groups = extract_chat_groups(token)
+    
+    return jsonify({
+        'token_info': token_check,
+        'chat_groups': chat_groups
     })
 
 # Keep-alive endpoint to prevent sleep
