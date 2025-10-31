@@ -458,7 +458,7 @@ def ping():
     return 'pong'
 
 # Start the global keep-alive when app starts
-@app.before_first_request
+@app.before_request
 def startup():
     start_global_keep_alive()
 
